@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid px-0" style="margin-top: -1.5rem;">
+
+    <section class="bg-dark text-white pt-5 pb-5 position-relative overflow-hidden" style="min-height: 80vh; display: flex; align-items: center;">
+        <div class="container py-5 z-2 position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <span class="badge bg-success bg-opacity-25 text-success px-3 py-2 rounded-pill mb-3 fw-semibold tracking-wide">
+                        <i class="fa-solid fa-star text-warning me-1"></i> #1 Personal Finance App
+                    </span>
+                    <h1 class="display-3 fw-black mb-4" style="line-height: 1.2;">
+                        Master Your Money. <br>
+                        <span class="text-success">Shape Your Future.</span>
+                    </h1>
+                    <p class="lead text-light mb-5 text-opacity-75" style="max-width: 90%;">
+                        Stop wondering where your money went. Our intuitive dashboard tracks every penny, generates stunning visual reports, and helps you build wealth effortlessly.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#" class="btn btn-success btn-lg fw-bold px-5 py-3 shadow-lg rounded-pill">
+                            Start Tracking Free
+                        </a>
+                        <a href="#features" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill d-none d-sm-block">
+                            Explore Features
+                        </a>
+                    </div>
+                    <div class="mt-4 text-white-50 small">
+                        <i class="fa-solid fa-check text-success me-1"></i> No credit card required. Cancel anytime.
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 text-center position-relative d-none d-lg-block">
+                    <div class="bg-white p-2 rounded-4 shadow-lg transform-rotate" style="transform: perspective(1000px) rotateY(-15deg); border: 1px solid rgba(255,255,255,0.1);">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Dashboard Preview" class="img-fluid rounded-3 opacity-75" style="filter: hue-rotate(120deg) contrast(1.2);">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="position-absolute top-0 end-0 bg-success opacity-20" style="width: 600px; height: 600px; border-radius: 50%; filter: blur(100px); transform: translate(30%, -30%); z-index: 1;"></div>
+        <div class="position-absolute bottom-0 start-0 bg-primary opacity-20" style="width: 400px; height: 400px; border-radius: 50%; filter: blur(100px); transform: translate(-20%, 20%); z-index: 1;"></div>
+    </section>
+
+    <section class="bg-success text-white py-4 shadow-sm relative z-3">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-3 mb-md-0 border-end border-white border-opacity-25">
+                    <h2 class="display-5 fw-bold mb-0">50K+</h2>
+                    <p class="text-white-50 fw-semibold mb-0 text-uppercase tracking-widest">Active Users</p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0 border-end border-white border-opacity-25">
+                    <h2 class="display-5 fw-bold mb-0">₹10M+</h2>
+                    <p class="text-white-50 fw-semibold mb-0 text-uppercase tracking-widest">Expenses Tracked</p>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="display-5 fw-bold mb-0">4.9/5</h2>
+                    <p class="text-white-50 fw-semibold mb-0 text-uppercase tracking-widest">User Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-5 my-5">
+        <div class="container">
+            <div class="text-center mb-5 pb-4">
+                <h6 class="text-success fw-bold text-uppercase tracking-widest">Everything you need</h6>
+                <h2 class="display-5 fw-bold text-dark">Powerful tools, simple interface</h2>
+                <p class="text-muted lead mx-auto mt-3" style="max-width: 700px;">We built ExpenseTracker to get out of your way. Spend less time logging data and more time understanding it.</p>
+            </div>
+
+            <div class="row align-items-center mb-5 pb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0 px-4">
+                    <div class="bg-light rounded-4 p-5 text-center shadow-sm h-100 d-flex align-items-center justify-content-center" style="min-height: 350px;">
+                        <i class="fa-solid fa-chart-line text-success opacity-50" style="font-size: 8rem;"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6 px-4">
+                    <div class="bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 60px; height: 60px;">
+                        <i class="fa-solid fa-magnifying-glass-chart fs-4"></i>
+                    </div>
+                    <h3 class="fw-bold mb-3">Deep Visual Analytics</h3>
+                    <p class="text-muted fs-5 mb-4">
+                        Raw numbers are boring. Our system converts your spending habits into interactive, colorful charts. Instantly see if you're spending too much on food, rent, or entertainment.
+                    </p>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i> Dynamic Pie Charts for categories</li>
+                        <li class="mb-2"><i class="fa-solid fa-circle-check text-success me-2"></i> Bar Graphs for monthly comparisons</li>
+                        <li><i class="fa-solid fa-circle-check text-success me-2"></i> Exportable reports for your records</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-5 pb-5 flex-lg-row-reverse">
+                <div class="col-lg-6 mb-4 mb-lg-0 px-4">
+                    <div class="bg-dark rounded-4 p-5 text-center shadow-sm h-100 d-flex align-items-center justify-content-center" style="min-height: 350px;">
+                        <i class="fa-solid fa-lock text-white opacity-50" style="font-size: 8rem;"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6 px-4">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 60px; height: 60px;">
+                        <i class="fa-solid fa-shield-halved fs-4"></i>
+                    </div>
+                    <h3 class="fw-bold mb-3">Bank-Grade Privacy</h3>
+                    <p class="text-muted fs-5 mb-4">
+                        Your financial data is extremely personal. We employ strict data isolation protocols ensuring that your records are encrypted and accessible only by you.
+                    </p>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><i class="fa-solid fa-circle-check text-primary me-2"></i> Dedicated sessions per user</li>
+                        <li class="mb-2"><i class="fa-solid fa-circle-check text-primary me-2"></i> CSRF & SQL Injection protection</li>
+                        <li><i class="fa-solid fa-circle-check text-primary me-2"></i> Zero third-party data sharing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5 pb-3">
+                <h2 class="display-6 fw-bold text-dark">How It Works in 3 Steps</h2>
+                <p class="text-muted">Simplicity is the ultimate sophistication.</p>
+            </div>
+            
+            <div class="row g-4 position-relative">
+                <div class="position-absolute top-50 start-50 translate-middle w-75 border-top border-2 border-dashed border-secondary opacity-25 d-none d-md-block" style="z-index: 0;"></div>
+                
+                <div class="col-md-4 position-relative z-1">
+                    <div class="card h-100 border-0 shadow-sm text-center p-4 rounded-4">
+                        <div class="card-body">
+                            <div class="bg-white border border-4 border-success text-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-4 fw-bold fs-3 shadow" style="width: 80px; height: 80px;">1</div>
+                            <h4 class="fw-bold">Sign Up</h4>
+                            <p class="text-muted">Create your secure account in under 30 seconds. No banking details required.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 position-relative z-1">
+                    <div class="card h-100 border-0 shadow-sm text-center p-4 rounded-4">
+                        <div class="card-body">
+                            <div class="bg-white border border-4 border-success text-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-4 fw-bold fs-3 shadow" style="width: 80px; height: 80px;">2</div>
+                            <h4 class="fw-bold">Log Transactions</h4>
+                            <p class="text-muted">Quickly add your daily incomes and expenses categorizing them on the fly.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 position-relative z-1">
+                    <div class="card h-100 border-0 shadow-sm text-center p-4 rounded-4">
+                        <div class="card-body">
+                            <div class="bg-white border border-4 border-success text-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-4 fw-bold fs-3 shadow" style="width: 80px; height: 80px;">3</div>
+                            <h4 class="fw-bold">Gain Insights</h4>
+                            <p class="text-muted">Watch your dashboard update in real-time, helping you make smarter choices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 my-5">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 pb-3">Loved by savers worldwide</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-4 rounded-4 bg-success bg-opacity-10 h-100">
+                        <div class="d-flex text-warning mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="fst-italic text-dark mb-4">"Absolutely brilliant! It completely changed how I look at my monthly budget. The chart UI is incredibly smooth."</p>
+                        <div class="d-flex align-items-center mt-auto">
+                            <div class="bg-dark rounded-circle text-white d-flex align-items-center justify-content-center fw-bold me-3" style="width: 45px; height: 45px;">A</div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Aman Sharma</h6>
+                                <small class="text-muted">Freelancer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card border-0 shadow p-4 rounded-4 bg-dark text-white h-100 transform-scale" style="transform: scale(1.05); z-index: 2;">
+                        <div class="d-flex text-warning mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="fst-italic mb-4 text-light">"As a developer, I appreciate clean architecture. The speed at which this dashboard updates is phenomenal. Highly recommend!"</p>
+                        <div class="d-flex align-items-center mt-auto">
+                            <div class="bg-success rounded-circle text-white d-flex align-items-center justify-content-center fw-bold me-3" style="width: 45px; height: 45px;">N</div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Neha Gupta</h6>
+                                <small class="text-white-50">Software Engineer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm p-4 rounded-4 bg-success bg-opacity-10 h-100">
+                        <div class="d-flex text-warning mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                        </div>
+                        <p class="fst-italic text-dark mb-4">"Very straightforward. No cluttered menus, just pure expense tracking. Exactly what I needed for my small business."</p>
+                        <div class="d-flex align-items-center mt-auto">
+                            <div class="bg-secondary rounded-circle text-white d-flex align-items-center justify-content-center fw-bold me-3" style="width: 45px; height: 45px;">R</div>
+                            <div>
+                                <h6 class="fw-bold mb-0">Rahul Verma</h6>
+                                <small class="text-muted">Small Business Owner</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light py-5">
+        <div class="container py-5">
+            <h2 class="text-center fw-bold mb-5 pb-3">Frequently Asked Questions</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion shadow-sm rounded-4 overflow-hidden" id="faqAccordion">
+                        
+                        <div class="accordion-item border-0 border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold fs-5 py-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Is my financial data secure?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted pb-4">
+                                    Yes, absolute security is our top priority. Your data is isolated and encrypted via industry-standard Django security protocols. We do not connect to your bank, so your actual money is never at risk.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item border-0 border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold fs-5 py-4 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Is it really 100% free?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted pb-4">
+                                    Absolutely. All the core features including unlimited transactions, category management, and visual charts are free forever for individual users.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item border-0">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold fs-5 py-4 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Can I export my data?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted pb-4">
+                                    Currently, you can visualize all data directly on your dashboard. CSV and PDF export functionalities are currently in our development pipeline and will be rolling out very soon.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white text-center position-relative overflow-hidden">
+        <div class="container py-5 position-relative z-2">
+            <h2 class="display-5 fw-bold mb-3">Stop stressing over money.</h2>
+            <p class="lead text-white-50 mb-5 max-w-lg mx-auto" style="max-width: 600px;">
+                Join thousands of smart individuals who have taken control of their financial destiny. Setup takes literally 30 seconds.
+            </p>
+            <a href="#" class="btn btn-success btn-lg fw-bold px-5 py-3 rounded-pill shadow-lg">
+                Create Your Account Now <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        <div class="position-absolute top-50 start-50 translate-middle bg-success opacity-25" style="width: 800px; height: 300px; filter: blur(120px); z-index: 1;"></div>
+    </section>
+
+    <div class="d-md-none position-fixed bottom-0 end-0 m-3" style="z-index: 1050;">
+        <a href="{% url 'login' %}" class="btn btn-success btn-lg rounded-pill shadow-lg fw-bold px-4 py-3 d-flex align-items-center gap-2 border-2 border-white">
+            <i class="fa-solid fa-rocket fs-4"></i>
+            <span>Access Tools</span>
+        </a>
+    </div>
+
+</div>
+{% endblock %}
