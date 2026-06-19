@@ -34,5 +34,6 @@ def login_view(request):
     return render(request, 'accounts/login.html', {'form': form})
 
 def logout_view(request):
-    logout(request)
+    if request.method == 'post' or request.user.is_authenticated:
+        logout(request)
     return render(request, 'accounts/logout.html')

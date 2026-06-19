@@ -25,16 +25,32 @@
             </button>
             
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'dashboard' %}"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+                <ul class="navbar-nav ms-auto align-items-center">
+                {% if user.is_authenticated %}
+                    <li class="nav-item me-3">
+                        <span class="nav-link text-warning fw-bold">
+                            <i class="fa-solid fa-circle-user me-1"></i> Hi, {{ user.username }}
+                        </span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'add_expense' %}"><i class="fa-solid fa-plus"></i> Add Entry</a>
+                        <form method="post" action="{% url 'logout' %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm fw-bold shadow-sm">
+                                <i class="fa-solid fa-power-off me-1"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                    
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="{% url 'login' %}">Login</a>
                     </li>
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-success btn-sm mt-1" href="{% url 'login' %}">Login / Register</a>
+                        <a class="btn btn-success btn-sm mt-1 mt-lg-0 fw-bold shadow-sm" href="{% url 'register' %}">
+                            Register
+                        </a>
                     </li>
+                {% endif %}
                 </ul>
             </div>
         </div>

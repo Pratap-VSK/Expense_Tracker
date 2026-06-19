@@ -1,31 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h3 class="fw-bold mb-4">Financial Overview</h3>
+<div class="container py-4">
+    <h3 class="fw-bold mb-4 text-gray-800">Financial Overview</h3>
 
     <div class="row mb-4">
+        <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card shadow-sm border-0 border-start border-success border-4 rounded-3 h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-1 text-uppercase font-weight-bold" style="font-size: 0.85rem; letter-spacing: 0.5px;">Total Income</p>
+                    <h3 class="text-success fw-bold mb-0">₹ {{ total_income|default:"0.00" }}</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card shadow-sm border-0 border-start border-danger border-4 rounded-3 h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-1 text-uppercase font-weight-bold" style="font-size: 0.85rem; letter-spacing: 0.5px;">Total Expense</p>
+                    <h3 class="text-danger fw-bold mb-0">₹ {{ total_expense|default:"0.00" }}</h3>
+                </div>
+            </div>
+        </div>
+        
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 border-start border-success border-4">
+            <div class="card shadow-sm border-0 border-start border-primary border-4 bg-primary text-white rounded-3 h-100 transition-all">
                 <div class="card-body">
-                    <p class="text-muted mb-1">Total Income</p>
-                    <h3 class="text-success fw-bold">₹ {{ total_income|default:"0.00" }}</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mt-3 mt-md-0">
-            <div class="card shadow-sm border-0 border-start border-danger border-4">
-                <div class="card-body">
-                    <p class="text-muted mb-1">Total Expense</p>
-                    <h3 class="text-danger fw-bold">₹ {{ total_expense|default:"0.00" }}</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mt-3 mt-md-0">
-            <div class="card shadow-sm border-0 border-start border-primary border-4 bg-primary text-white">
-                <div class="card-body">
-                    <p class="text-white-50 mb-1">Current Balance</p>
-                    <h3 class="fw-bold">₹ {{ balance|default:"0.00" }}</h3>
+                    <p class="text-white-50 mb-1 text-uppercase font-weight-bold" style="font-size: 0.85rem; letter-spacing: 0.5px;">Current Balance</p>
+                    <h3 class="fw-bold mb-0">₹ {{ balance|default:"0.00" }}</h3>
                 </div>
             </div>
         </div>
@@ -33,50 +35,177 @@
 
     <div class="row">
         <div class="col-lg-5 mb-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body">
-                    <h5 class="fw-bold mb-3">Expenses by Category</h5>
-                    <canvas id="expenseChart" style="max-height: 300px;"></canvas>
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="fw-bold mb-4 text-gray-800">Expenses by Category</h5>
+                    
+                    {% if chart_data == '[]' %}
+                        <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-muted p-4 bg-light rounded-3">
+                            <i class="fas fa-chart-pie text-4xl mb-3 opacity-25" style="font-size: 3rem;"></i>
+                            <p class="mb-0 fw-medium">No expenses yet to show.</p>
+                        </div>
+                    {% else %}
+                        <div class="flex-grow-1" style="position: relative; min-height: 280px; width: 100%;">
+                            <canvas id="expenseChart"></canvas>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
 
         <div class="col-lg-7 mb-4">
-            <div class="card shadow-sm border-0 h-100">
+            <div class="card shadow-sm border-0 rounded-3 h-100">
                 <div class="card-body d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0">Recent Transactions</h5>
-                        <a href="#" class="btn btn-sm btn-success"><i class="fa-solid fa-plus"></i> Add New</a>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0 text-gray-800">Recent Transactions</h5>
+                        <a href="{% url 'add_expense' %}" class="btn btn-primary shadow-sm rounded-pill px-4 fw-medium transition-all hover-lift">
+                            <i class="fas fa-plus me-2"></i> Add Entry
+                        </a>
                     </div>
                     
                     <div class="table-responsive flex-grow-1">
-                        <table class="table table-hover align-middle">
+                        <table class="table table-hover align-middle mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Category</th>
-                                    <th>Amount</th>
-                                    <th>Action</th>
+                                    <th class="text-secondary font-weight-semibold text-uppercase" style="font-size: 0.75rem;">Date</th>
+                                    <th class="text-secondary font-weight-semibold text-uppercase" style="font-size: 0.75rem;">Description</th>
+                                    <th class="text-secondary font-weight-semibold text-uppercase" style="font-size: 0.75rem;">Category</th>
+                                    <th class="text-secondary font-weight-semibold text-uppercase" style="font-size: 0.75rem;">Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for transaction in recent_transactions %}
                                 <tr>
-                                    <td>17 Jun 2026</td>
-                                    <td>Grocery Shopping</td>
-                                    <td><span class="badge bg-secondary">Food</span></td>
-                                    <td class="text-danger fw-bold">-₹ 500.00</td>
+                                    <td class="text-muted" style="font-size: 0.9rem;">{{ transaction.date|date:"d M Y" }}</td>
+                                    <td class="fw-medium text-dark">{{ transaction.description|default:"-" }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-pen"></i></a>
-                                        <a href="#" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                        <span class="badge rounded-pill {% if transaction.category.category_type == 'EXPENSE' %}bg-danger bg-opacity-10 text-danger{% else %}bg-success bg-opacity-10 text-success{% endif %} px-3 py-2 fw-semibold">
+                                            {{ transaction.category.name|default:"Uncategorized" }}
+                                        </span>
+                                    </td>
+                                    <td class="fw-bold {% if transaction.category.category_type == 'EXPENSE' %}text-danger{% else %}text-success{% endif %}">
+                                        {% if transaction.category.category_type == 'EXPENSE' %}-{% else %}+{% endif %}₹ {{ transaction.amount }}
                                     </td>
                                 </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-5 text-muted">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <div class="bg-light rounded-circle p-4 mb-3">
+                                                <i class="fas fa-receipt text-3xl opacity-50" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <h6 class="fw-bold text-dark">No recent transactions</h6>
+                                            <p class="mb-0">Your latest entries will appear here.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const labelsData = {{ chart_labels|safe }};
+        const amountsData = {{ chart_data|safe }};
+
+        if (amountsData.length > 0 && document.getElementById('expenseChart')) {
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            
+            // Modern, vibrant color palette
+            const chartColors = [
+                '#FF6B6B', // Red
+                '#4ECDC4', // Teal
+                '#FFD93D', // Yellow
+                '#6A0572', // Deep Purple
+                '#1A535C', // Dark Slate
+                '#FF9F1C'  // Orange
+            ];
+
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labelsData,
+                    datasets: [{
+                        data: amountsData,
+                        backgroundColor: chartColors,
+                        borderWidth: 0,
+                        hoverOffset: 8,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                font: { 
+                                    family: "'Inter', 'Segoe UI', sans-serif", 
+                                    size: 12,
+                                    weight: '500'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                            titleColor: '#1f2937',
+                            bodyColor: '#1f2937',
+                            borderColor: '#e5e7eb',
+                            borderWidth: 1,
+                            padding: 12,
+                            boxPadding: 6,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += '₹ ' + context.parsed;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '75%',
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    /* Small custom tweaks for a cleaner look */
+    .hover-lift:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+    .badge {
+        letter-spacing: 0.3px;
+    }
+</style>
 {% endblock %}

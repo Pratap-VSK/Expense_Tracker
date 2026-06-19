@@ -7,7 +7,7 @@ class Category(models.Model):
         ('EXPENSE', 'Expense')
     )
     name = models.CharField(max_length=50)
-    category_type = models.CharField(max_length=10, choices=TYPE_CHOICES, default='EXPENSE')
+    category_type = models.CharField(max_length=10, choices=TYPE_CHOICES)
 
     def __str__(self):
         return f"{self.name} ({self.category_type})"
@@ -15,7 +15,8 @@ class Category(models.Model):
 class Transaction(models.Model):
     # User linkage for Data Isolation
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transactions')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    # SET_NULL requires null=True in database
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=255, blank=True, null=True)
@@ -25,4 +26,5 @@ class Transaction(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"₹{self.amount} - {self.category.name} on {self.date}"
+        cat_name = self.category.name if self.category else "Uncategorized"
+        return f"₹{self.amount} - {cat_name} on {self.date}"

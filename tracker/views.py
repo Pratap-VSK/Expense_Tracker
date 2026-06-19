@@ -1,25 +1,35 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
+from decimal import Decimal
 from .models import Transaction, Category
 from .forms import TransactionForm
+import json
 
-# [READ] Dashboard View
 @login_required
 def dashboard(request):
-    # Sirf logged-in user ke transactions fetch karo
-    transactions = Transaction.objects.filter(user=request.user).order_by('-date', '-created_at')
+    transactions = Transaction.objects.filter(user=request.user)
 
-    # Total Income aur Expense calculate karo
-    incomes = transactions.filter(category__category_type='INCOME').aggregate(Sum('amount'))['amount__sum'] or 0
-    expenses = transactions.filter(category__category_type='EXPENSE').aggregate(Sum('amount'))['amount__sum'] or 0
-    balance = incomes - expenses
+    total_income = transactions.filter(category__category_type='INCOME').aggregate(Sum('amount'))['amount__sum'] or Decimal('0.00')
+    total_expense = transactions.filter(category__category_type='EXPENSE').aggregate(Sum('amount'))['amount__sum'] or Decimal('0.00')
+    balance = total_income - total_expense
+
+    recent_transactions = transactions.order_by('-date')[:5]
+
+    expenses_data = transactions.filter(category__category_type='EXPENSE') \
+                                .values('category__name') \
+                                .annotate(total=Sum('amount'))
+
+    chart_labels = [item['category__name'] or 'Uncategorized' for item in expenses_data]
+    chart_data = [float(item['total']) for item in expenses_data]
 
     context = {
-        'transactions': transactions[:10], # Sirf latest 10 transactions table mein dikhayenge
-        'total_income': incomes,
-        'total_expense': expenses,
+        'total_income': total_income,
+        'total_expense': total_expense,
         'balance': balance,
+        'recent_transactions': recent_transactions,
+        'chart_labels': json.dumps(chart_labels),
+        'chart_data': json.dumps(chart_data),
     }
     return render(request, 'tracker/dashboard.html', context)
 
